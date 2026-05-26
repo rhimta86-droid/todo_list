@@ -26,9 +26,9 @@ body {
   align-items: center;
   padding: 18px 24px;
   gap: 16px;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 2px 16px rgba(15, 23, 42, 0.07);
+  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+  color: white;
+  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.18);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -37,7 +37,7 @@ body {
 .nav-brand {
   font-weight: 700;
   font-size: 1.1rem;
-  color: #1f2937;
+  color: #eff6ff;
 }
 
 .nav-links {
@@ -46,14 +46,14 @@ body {
 }
 
 .nav-link {
-  color: #4b5563;
+  color: rgba(241, 245, 249, 0.9);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
 .nav-link:hover {
-  color: #1d4ed8;
+  color: #ffffff;
 }
 
 .container {
