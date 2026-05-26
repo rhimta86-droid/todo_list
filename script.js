@@ -3,13 +3,33 @@ const input = document.getElementById('todo-input');
 const list = document.getElementById('todo-list');
 const remainingCount = document.getElementById('remaining-count');
 const clearCompletedButton = document.getElementById('clear-completed');
+const themeToggle = document.getElementById('theme-toggle');
 const STORAGE_KEY = 'todo-list-items';
+const THEME_KEY = 'todo-list-theme';
 
 let todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
 const saveTodos = () => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
 };
+
+const applyTheme = (theme) => {
+  document.documentElement.dataset.theme = theme;
+  themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+  themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to day mode' : 'Switch to night mode');
+  localStorage.setItem(THEME_KEY, theme);
+};
+
+const initTheme = () => {
+  const savedTheme = localStorage.getItem(THEME_KEY);
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  applyTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
+};
+
+themeToggle.addEventListener('click', () => {
+  const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  applyTheme(nextTheme);
+});
 
 const updateStats = () => {
   const remaining = todos.filter((todo) => !todo.completed).length;
@@ -103,4 +123,5 @@ clearCompletedButton.addEventListener('click', () => {
   renderTodos();
 });
 
+initTheme();
 renderTodos();

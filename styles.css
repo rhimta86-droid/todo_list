@@ -1,8 +1,47 @@
 :root {
   color-scheme: light;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background-color: #f3f4f6;
-  color: #111827;
+  --page-bg: linear-gradient(180deg, #eef2ff 0%, #f8fafc 100%);
+  --body-bg: #f3f4f6;
+  --surface: #ffffff;
+  --surface-soft: #f9fafb;
+  --text: #111827;
+  --muted: #4b5563;
+  --border: #d1d5db;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --nav-bg: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+  --nav-text: #eff6ff;
+  --nav-link: rgba(241, 245, 249, 0.9);
+  --nav-link-hover: #ffffff;
+  --toggle-bg: rgba(255, 255, 255, 0.18);
+  --toggle-text: #ffffff;
+  --box-shadow: 0 28px 100px rgba(15, 23, 42, 0.12);
+  --nav-shadow: 0 12px 32px rgba(37, 99, 235, 0.18);
+  color: var(--text);
+  background-color: var(--body-bg);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --page-bg: linear-gradient(180deg, #020617 0%, #0b1121 100%);
+  --body-bg: #020617;
+  --surface: #11213f;
+  --surface-soft: #0c172f;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --border: #334155;
+  --primary: #60a5fa;
+  --primary-dark: #3b82f6;
+  --nav-bg: linear-gradient(135deg, #1e3a8a 0%, #4c1d95 100%);
+  --nav-text: #dbeafe;
+  --nav-link: rgba(219, 234, 254, 0.88);
+  --nav-link-hover: #ffffff;
+  --toggle-bg: rgba(255, 255, 255, 0.14);
+  --toggle-text: #ffffff;
+  --box-shadow: 0 28px 100px rgba(0, 0, 0, 0.25);
+  --nav-shadow: 0 12px 32px rgba(15, 23, 42, 0.25);
+  color: var(--text);
 }
 
 * {
@@ -15,7 +54,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 100%);
+  background: var(--page-bg);
+  color: var(--text);
 }
 
 .top-nav {
@@ -26,12 +66,18 @@ body {
   align-items: center;
   padding: 18px 24px;
   gap: 16px;
-  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
-  color: white;
-  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.18);
+  background: var(--nav-bg);
+  color: var(--nav-text);
+  box-shadow: var(--nav-shadow);
   position: sticky;
   top: 0;
   z-index: 10;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .nav-brand {
@@ -46,22 +92,41 @@ body {
 }
 
 .nav-link {
-  color: rgba(241, 245, 249, 0.9);
+  color: var(--nav-link);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
 .nav-link:hover {
-  color: #ffffff;
+  color: var(--nav-link-hover);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  background: var(--toggle-bg);
+  color: var(--toggle-text);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.05rem;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
 }
 
 .container {
   width: min(640px, 90vw);
-  background: #ffffff;
+  background: var(--surface);
   border-radius: 28px;
   padding: 32px;
-  box-shadow: 0 28px 100px rgba(15, 23, 42, 0.12);
+  box-shadow: var(--box-shadow);
   overflow: hidden;
   animation: fadeInUp 0.6s ease;
 }
@@ -92,9 +157,11 @@ h1 {
 .todo-form input {
   flex: 1;
   padding: 16px 18px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border);
   border-radius: 14px;
   font-size: 1rem;
+  background: var(--surface);
+  color: var(--text);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -108,7 +175,7 @@ h1 {
   padding: 16px 22px;
   border: none;
   border-radius: 14px;
-  background: #2563eb;
+  background: var(--primary);
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -116,7 +183,7 @@ h1 {
 }
 
 .todo-form button:hover {
-  background: #1d4ed8;
+  background: var(--primary-dark);
   transform: translateY(-1px);
 }
 
@@ -126,12 +193,12 @@ h1 {
   align-items: center;
   gap: 12px;
   margin-bottom: 16px;
-  color: #4b5563;
+  color: var(--muted);
 }
 
 #clear-completed {
   background: transparent;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border);
   border-radius: 999px;
   padding: 10px 16px;
   cursor: pointer;
@@ -139,9 +206,9 @@ h1 {
 }
 
 #clear-completed:hover {
-  background: #eff6ff;
-  border-color: #93c5fd;
-  color: #1e3a8a;
+  background: rgba(37, 99, 235, 0.12);
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
 .todo-list {
@@ -158,9 +225,9 @@ h1 {
   justify-content: space-between;
   gap: 12px;
   padding: 18px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border);
   border-radius: 18px;
-  background: #f9fafb;
+  background: var(--surface-soft);
   transform-origin: top;
   animation: slideIn 0.35s ease forwards;
 }
@@ -221,7 +288,7 @@ h1 {
 .todo-actions button {
   border: none;
   background: transparent;
-  color: #6b7280;
+  color: var(--muted);
   cursor: pointer;
   font-size: 0.95rem;
   transition: color 0.2s ease, transform 0.2s ease;
