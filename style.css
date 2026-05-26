@@ -1,0 +1,306 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --page-bg: linear-gradient(180deg, #eef2ff 0%, #f8fafc 100%);
+  --body-bg: #f3f4f6;
+  --surface: #ffffff;
+  --surface-soft: #f9fafb;
+  --text: #111827;
+  --muted: #4b5563;
+  --border: #d1d5db;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --nav-bg: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+  --nav-text: #eff6ff;
+  --nav-link: rgba(241, 245, 249, 0.9);
+  --nav-link-hover: #ffffff;
+  --toggle-bg: rgba(255, 255, 255, 0.18);
+  --toggle-text: #ffffff;
+  --box-shadow: 0 28px 100px rgba(15, 23, 42, 0.12);
+  --nav-shadow: 0 12px 32px rgba(37, 99, 235, 0.18);
+  color: var(--text);
+  background-color: var(--body-bg);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --page-bg: linear-gradient(180deg, #020617 0%, #0b1121 100%);
+  --body-bg: #020617;
+  --surface: #11213f;
+  --surface-soft: #0c172f;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --border: #334155;
+  --primary: #60a5fa;
+  --primary-dark: #3b82f6;
+  --nav-bg: linear-gradient(135deg, #1e3a8a 0%, #4c1d95 100%);
+  --nav-text: #dbeafe;
+  --nav-link: rgba(219, 234, 254, 0.88);
+  --nav-link-hover: #ffffff;
+  --toggle-bg: rgba(255, 255, 255, 0.14);
+  --toggle-text: #ffffff;
+  --box-shadow: 0 28px 100px rgba(0, 0, 0, 0.25);
+  --nav-shadow: 0 12px 32px rgba(15, 23, 42, 0.25);
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--page-bg);
+  color: var(--text);
+}
+
+.top-nav {
+  width: 100%;
+  max-width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  gap: 16px;
+  background: var(--nav-bg);
+  color: var(--nav-text);
+  box-shadow: var(--nav-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #eff6ff;
+}
+
+.nav-links {
+  display: flex;
+  gap: 18px;
+}
+
+.nav-link {
+  color: var(--nav-link);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--nav-link-hover);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  background: var(--toggle-bg);
+  color: var(--toggle-text);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.05rem;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+}
+
+.container {
+  width: min(640px, 90vw);
+  background: var(--surface);
+  border-radius: 28px;
+  padding: 32px;
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  margin: 0 0 22px;
+  font-size: clamp(2rem, 2.5vw, 2.5rem);
+  letter-spacing: -0.05em;
+}
+
+.todo-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.todo-form input {
+  flex: 1;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  font-size: 1rem;
+  background: var(--surface);
+  color: var(--text);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.todo-form input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.todo-form button {
+  padding: 16px 22px;
+  border: none;
+  border-radius: 14px;
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.todo-form button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.todo-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  color: var(--muted);
+}
+
+#clear-completed {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+#clear-completed:hover {
+  background: rgba(37, 99, 235, 0.12);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface-soft);
+  transform-origin: top;
+  animation: slideIn 0.35s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.todo-item.removing {
+  animation: removeItem 0.25s ease forwards;
+}
+
+@keyframes removeItem {
+  from {
+    opacity: 1;
+    transform: scale(1);
+    height: auto;
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.todo-item label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.todo-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.todo-text {
+  font-size: 1rem;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.todo-text.completed {
+  text-decoration: line-through;
+  color: #6b7280;
+}
+
+.todo-actions button {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.todo-actions button:hover {
+  color: #111827;
+  transform: translateX(2px);
+}
+
+.placeholder {
+  text-align: center;
+  color: #6b7280;
+  padding: 18px;
+}
